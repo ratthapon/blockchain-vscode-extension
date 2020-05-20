@@ -13,6 +13,7 @@
 */
 'use strict';
 import * as vscode from 'vscode';
+<<<<<<< HEAD
 import { UserInputUtil, IBlockchainQuickPickItem } from './UserInputUtil';
 import {Reporter} from '../util/Reporter';
 import {VSCodeBlockchainOutputAdapter} from '../logging/VSCodeBlockchainOutputAdapter';
@@ -28,6 +29,13 @@ import {
     FabricEnvironmentRegistry,
     EnvironmentFlags
 } from 'ibm-blockchain-platform-common';
+=======
+import { UserInputUtil, IBlockchainQuickPickItem, IncludeEnvironmentOptions } from './UserInputUtil';
+import { Reporter } from '../util/Reporter';
+import { VSCodeBlockchainOutputAdapter } from '../logging/VSCodeBlockchainOutputAdapter';
+import { FabricGatewayHelper } from '../fabric/FabricGatewayHelper';
+import { FabricEnvironmentRegistryEntry, FabricNode, FabricNodeType, FabricRuntimeUtil, LogType, FabricGatewayRegistry, FabricGatewayRegistryEntry, FabricEnvironmentRegistry, EnvironmentType } from 'ibm-blockchain-platform-common';
+>>>>>>> e147cdd3... Update gateway and wallet groupings (#2305)
 
 export async function addGateway(): Promise<{} | void> {
     const outputAdapter: VSCodeBlockchainOutputAdapter = VSCodeBlockchainOutputAdapter.instance();
@@ -123,6 +131,14 @@ async function createGatewayFromEnvironment(gatewayName: string, environmentRegi
     const fabricGatewayEntry: FabricGatewayRegistryEntry = new FabricGatewayRegistryEntry();
     fabricGatewayEntry.name = gatewayName;
     fabricGatewayEntry.associatedWallet = peerNode.wallet;
+<<<<<<< HEAD
+=======
+    if (environmentRegistryEntry.environmentType === EnvironmentType.OPS_TOOLS_ENVIRONMENT || environmentRegistryEntry.environmentType === EnvironmentType.SAAS_OPS_TOOLS_ENVIRONMENT) {
+        fabricGatewayEntry.fromEnvironment = environmentRegistryEntry.name;
+    }
+
+    const connectionProfilePath: string = await FabricGatewayHelper.generateConnectionProfile(gatewayName, peerNode, caNode);
+>>>>>>> e147cdd3... Update gateway and wallet groupings (#2305)
     fabricGatewayEntry.connectionProfilePath = connectionProfilePath;
     fabricGatewayEntry.fromEnvironment = environmentRegistryEntry.name;
 
